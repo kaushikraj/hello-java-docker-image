@@ -1,0 +1,13 @@
+java_library(
+    name="helloservice",
+    srcs = ["main/HelloService.java"],
+)
+
+load("@io_bazel_rules_docker//java:image.bzl", "java_image")
+
+java_image(
+    name = "cos_image",
+    base = "@java17//image",
+    main_class = "main.HelloService",
+    runtime_deps = [":helloservice"],
+)
